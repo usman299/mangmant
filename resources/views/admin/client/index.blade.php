@@ -34,8 +34,8 @@
                                                  src="{{asset($row->image)}}"></td>
 
                                         <td>
-                                            <a href="#" class="btn btn-primary"><i class="fa fa-pen"></i></a>
-                                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                            <a href="{{route('client.edit',['id'=>$row->id])}}" class="btn btn-primary"><i class="fa fa-pen"></i></a>
+                                            <a href="{{route('client.delete',['id'=>$row->id])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                             <a href="#" class="btn btn-success"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>

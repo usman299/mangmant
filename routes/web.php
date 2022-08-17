@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -25,6 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/client/create', 'ClientController@create')->name('client.create');
 Route::post('/client/store', 'ClientController@store')->name('client.store');
 Route::get('/client/index', 'ClientController@index')->name('client.index');
+Route::get('/client/edit/{id}', 'ClientController@edit')->name('client.edit');
+Route::post('/client/update/{id}', 'ClientController@update')->name('client.update');
+Route::get('/client/delete/{id}', 'ClientController@destroy')->name('client.delete');
 
 //End Client Info
 

@@ -72,9 +72,9 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
-    {
-        //
+    public function edit($id)
+    {  $client = Client::find($id);
+       return  view('admin.client.edit',compact('client'));
     }
 
     /**
@@ -84,9 +84,23 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+        $client->name = $request->name;
+        $client->dob = $request->dob;
+        $client->cnic = $request->cnic;
+        $client->description = $request->description;
+        if ($request->hasfile('image')) {
+            $image1 = $request->file('image');
+            $name = time() . 'image' . '.' . $image1->getClientOriginalExtension();
+            $destinationPath = 'image/';
+            $image1->move($destinationPath, $name);
+            $client->image = 'image/' . $name;
+        }
+        $client->update();
+        return redirect()->back();
+
     }
 
     /**
@@ -95,8 +109,11 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+        $client->delete();
+        return redirect()->back();
+
     }
 }
